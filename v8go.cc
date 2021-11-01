@@ -388,6 +388,13 @@ int ObjectTemplateInternalFieldCount(TemplatePtr ptr) {
   return obj_tmpl->InternalFieldCount();
 }
 
+void ObjectTemplateMarkAsUndetectable(TemplatePtr ptr) {
+  LOCAL_TEMPLATE(ptr);
+
+  Local<ObjectTemplate> obj_tmpl = tmpl.As<ObjectTemplate>();
+  obj_tmpl->MarkAsUndetectable();
+}
+
 /********** FunctionTemplate **********/
 
 static void FunctionTemplateCallback(const FunctionCallbackInfo<Value>& info) {

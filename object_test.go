@@ -185,7 +185,6 @@ func TestObjectDelete(t *testing.T) {
 	if !obj.DeleteIdx(2) {
 		t.Error("expected delete to return true, got false")
 	}
-
 }
 
 func ExampleObject_global() {

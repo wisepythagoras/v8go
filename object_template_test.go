@@ -8,6 +8,7 @@ import (
 	"math/big"
 	"testing"
 
+	"rogchap.com/v8go"
 	v8 "rogchap.com/v8go"
 )
 
@@ -64,6 +65,29 @@ func TestObjectTemplate_panic_on_nil_isolate(t *testing.T) {
 		}
 	}()
 	v8.NewObjectTemplate(nil)
+}
+
+func TestObjectTemplateUndetectable(t *testing.T) {
+	t.Parallel()
+
+	iso := v8go.NewIsolate()
+	defer iso.Dispose()
+
+	globalObj := v8go.NewObjectTemplate(iso)
+	ctx := v8go.NewContext(iso, globalObj)
+	defer ctx.Close()
+
+	objTmpl := v8go.NewObjectTemplate(iso)
+	objTmpl.MarkAsUndetectable()
+	objTmpl.Set("test", 123)
+
+	// global := ctx.Global()
+
+	// TODO: This returns an error because objTmpl is undefined.
+	// obj, _ := objTmpl.NewInstance(ctx)
+
+	// fmt.Println(iso, ctx)
+	// global.Set("undetectable_obj", obj)
 }
 
 func TestGlobalObjectTemplate(t *testing.T) {
