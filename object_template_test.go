@@ -90,6 +90,25 @@ func TestObjectTemplateUndetectable(t *testing.T) {
 	// global.Set("undetectable_obj", obj)
 }
 
+func TestObjectTemplateImmutable(t *testing.T) {
+	t.Parallel()
+
+	iso := v8go.NewIsolate()
+	defer iso.Dispose()
+
+	ctx := v8go.NewContext(iso)
+	defer ctx.Close()
+
+	objTmpl := v8go.NewObjectTemplate(iso)
+	objTmpl.SetImmutableProto()
+
+	isImmutable := objTmpl.IsImmutableProto()
+
+	if !isImmutable {
+		t.Error("The object template should be immutable")
+	}
+}
+
 func TestGlobalObjectTemplate(t *testing.T) {
 	t.Parallel()
 	iso := v8.NewIsolate()

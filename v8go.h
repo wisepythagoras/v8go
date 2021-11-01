@@ -146,6 +146,8 @@ extern RtnValue ObjectTemplateNewInstance(TemplatePtr ptr, ContextPtr ctx_ptr);
 extern void ObjectTemplateSetInternalFieldCount(TemplatePtr ptr, uint32_t field_count);
 extern int ObjectTemplateInternalFieldCount(TemplatePtr ptr);
 extern void ObjectTemplateMarkAsUndetectable(TemplatePtr ptr);
+extern void ObjectTemplateSetImmutableProto(TemplatePtr ptr);
+extern int ObjectTemplateIsImmutableProto(TemplatePtr ptr);
 
 extern TemplatePtr NewFunctionTemplate(IsolatePtr iso_ptr, int callback_ref);
 extern RtnValue FunctionTemplateGetFunction(TemplatePtr ptr,

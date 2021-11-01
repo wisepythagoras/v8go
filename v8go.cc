@@ -395,6 +395,20 @@ void ObjectTemplateMarkAsUndetectable(TemplatePtr ptr) {
   obj_tmpl->MarkAsUndetectable();
 }
 
+void ObjectTemplateSetImmutableProto(TemplatePtr ptr) {
+  LOCAL_TEMPLATE(ptr);
+
+  Local<ObjectTemplate> obj_tmpl = tmpl.As<ObjectTemplate>();
+  obj_tmpl->SetImmutableProto();
+}
+
+int ObjectTemplateIsImmutableProto(TemplatePtr ptr) {
+  LOCAL_TEMPLATE(ptr);
+
+  Local<ObjectTemplate> obj_tmpl = tmpl.As<ObjectTemplate>();
+  return obj_tmpl->IsImmutableProto();
+}
+
 /********** FunctionTemplate **********/
 
 static void FunctionTemplateCallback(const FunctionCallbackInfo<Value>& info) {

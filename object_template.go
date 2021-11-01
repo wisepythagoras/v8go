@@ -72,8 +72,19 @@ func (o *ObjectTemplate) InternalFieldCount() uint32 {
 	return uint32(C.ObjectTemplateInternalFieldCount(o.ptr))
 }
 
+// MarkAsUndetectable marks instances of object templates as undetectable
 func (o *ObjectTemplate) MarkAsUndetectable() {
 	C.ObjectTemplateMarkAsUndetectable(o.ptr)
+}
+
+// SetImmutableProto makes an immutable proto for the object template.
+func (o *ObjectTemplate) SetImmutableProto() {
+	C.ObjectTemplateSetImmutableProto(o.ptr)
+}
+
+// IsImmutableProto returns true or false whether the object template is immutable.
+func (o *ObjectTemplate) IsImmutableProto() bool {
+	return C.ObjectTemplateIsImmutableProto(o.ptr) == 1
 }
 
 func (o *ObjectTemplate) apply(opts *contextOptions) {
